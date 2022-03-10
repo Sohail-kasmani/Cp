@@ -1,0 +1,8 @@
+Cpp functions to save time in writing code
+1>toupper(char)  
+2>tolower(char) 
+3>isupper(char)
+4>islower(char)
+5>isspace(char)
+6>ispunct(char)
+7>isdigit(char)
