@@ -6,3 +6,13 @@ Cpp functions to save time in writing code
 5>isspace(char)
 6>ispunct(char)
 7>isdigit(char)
+# Some STL functions
+1>lower_bound(all(v),number)    these function return iterator for map or set m.upper_bound()
+2>upper_bound(all(v),number)    these function return iterator for map or set m.lower_bound()
+3>min_element(all(v),number)    these function return iterator
+4>max_element(all(v),number)    these function return iterator
+5>sort(all(v),cmp)
+6>reverse(all(v))
+7>accumulate(all(v),initial sum) returns value
+8>count(all(v),number) returns value in case of map to it returns value
+9>find(all(v),number) returns iterator in case of map also
