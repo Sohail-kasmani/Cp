@@ -1,0 +1,35 @@
+// Iterative
+tc: o(log2(n))
+sc: o(1)
+
+ll BinaryExp(int a,int n){
+    ll ans=1;
+    while(n>0){
+        if(n&1){
+            ans*=a;
+        }
+        n>>=1;
+        a*=a;
+
+
+    }
+    return ans;
+
+}
+
+////////////////////////////////////////////////////////////////////////
+Recursive way
+tc: o(log2(n))
+sc: o(log2(n))
+
+
+ll BinaryExp(int a,int n){
+    if(n==0) return 1;
+    ll x=BinaryExp(a,n/2);
+    if(n&1){
+        return x*x*a;
+    }
+    else{
+        return x*x;
+    }
+}
