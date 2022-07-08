@@ -1,0 +1,32 @@
+By GCD of both number it means that we take the common prime factors between both number and power of that prime number is min out of two
+
+Ex: 
+
+12-> 2^2 * 3^1
+18-> 2^1 * 3^2
+
+gcd(12,18) -> 2^1 * 3^1 = 6
+
+lcm is taking max power out of 2 prime number that are factor of both numbers
+
+i.e lcm(12,18) -> 2^2 * 3^2 = 36 
+
+i.e lcm(a,b) = (a*b)/gcd(a,b)
+
+----------------------------------------------------------------------------------------------------------------------------
+Efficient way to calcuate GCD is by long division also known as euclidean algo theorem
+
+axiom 1: gcd(a,b) == gcd(a-kb,b) where a>b
+axiom 2: gcd(0,a) == a
+
+these 2 axioms are used for proof
+
+------------------------------------------------------------------------------------------------------------------------------
+TC : log(min(a,b))
+
+
+
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);    
+}
