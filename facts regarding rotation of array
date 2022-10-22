@@ -1,0 +1,5 @@
+1 left rotation = (n-1) right rotation here shift is -1 (-) describes left
+x left rotation = (shift + n(size of array) ) right shift
+
+
+for ref ex: https://codeforces.com/problemset/problem/1365/C
