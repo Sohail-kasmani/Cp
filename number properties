@@ -1,3 +1,4 @@
 Any number which is divisible by 9 then its sum of digits is also divisible by 9
 multiplying by two in binary is equivalent to adding one zero to the right.
 Only perfect squares have an odd number of factors (factor here include non prime number as well)
+What is the maximum value of the LCM of three numbers ≤n, as a function of n? ------------> for n<=2 return n ,, if n is odd return n*(n-1)*(n-2) for even there are two cases if(n%3==0) return (n-1)*(n-2)*(n-3) else return n*(n-1)*(n-3)
