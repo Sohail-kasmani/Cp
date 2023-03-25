@@ -1,0 +1,9 @@
+tc : x*log(x)+ n
+preprocessing step x*log(x)
+ll arr[1000006];
+for(int i=1;i<=1000000;i++) for(int j=i;j<=1000000;j+=i) arr[j]++;
+while(q--){
+  ll n;
+  read(n);
+  cout<<arr[n]<<endl;
+}
