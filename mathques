@@ -1,0 +1,41 @@
+At the Shrewsbury Food Festival, Dolf Teuscher, a world renowned chocolatier, has prepared Chocolate Swiss rolls. The rolls need to be distributed to M sponsors such that each sponsor gets the exact same amount to taste. There are N equal sized Swiss rolls available, which can be cut to make the distribution. Help Dolf calculate the minimum number of cuts needed to divide the rolls equally.
+Read the input from STDIN and print the output to STDOUT. Do not write arbitrary strings while reading the input or while printing, as these contribute to the standard output.
+Constraints:
+1≤N, M≤1000
+Input Format:
+Single line of input contains two positive integers, N and M, the number of Swiss rolls and sponsors, respectively, separated by single white space.
+
+
+
+
+Output Format:
+Single line of output must contain the required minimum number of cuts.
+Sample Input 1:
+2 6
+Sample Output 1:
+4
+Explanation:
+There are two Swiss rolls and six sponsorers, it is sufficient to split each Swiss Roll into three equal parts, making a total of four cuts.
+
+
+Sample Input 2:
+3 4 
+Sample Output 2:
+3
+
+
+
+
+
+int getCakesCuts(int n,int m){
+    ll cnt=0;
+    while(n%m!=0){
+        if(n>=m) n-=m;
+        else{
+            m-=n;
+            cnt+=n;
+        }
+    }
+    return cnt;
+
+}
