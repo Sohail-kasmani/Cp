@@ -1,0 +1,30 @@
+1) Range Query and Point Update
+
+vll flat;
+void build(ll node,ll st,ll e,vll &flat){
+    if(st==e){
+        tree[node]=flat[st];
+        return ;
+    }
+    ll mid=(st+e)/2;
+    build(node*2+1,st,mid,flat);
+    build(node*2+2,mid+1,e,flat);
+    tree[node]=tree[node*2+1]+tree[node*2+2];
+}
+ll query(ll node,ll st,ll e,ll l,ll r){
+    if(e<l || st>r) return 0;
+    if(l<=st && e<=r) return tree[node];
+    ll mid=(st+e)/2;
+    return query(node*2+1,st,mid,l,r)+query(node*2+2,mid+1,e,l,r);
+}
+void update(ll node,ll st,ll e,ll ind,ll val){
+    if(ind<st || ind>e) return ;
+    if(st==e){
+        tree[node]=val;
+        return ;     
+    }
+    ll mid=(st+e)/2;
+    update(node*2+1,st,mid,ind,val);
+    update(node*2+2,mid+1,e,ind,val);
+    tree[node]=tree[node*2+1]+tree[node*2+2];
+}
