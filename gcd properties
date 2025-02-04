@@ -1,0 +1,9 @@
+gcd property:
+
+gcd(x,y) == gcd(x,(y-x))  --> x<y
+
+proof :
+gcd(x,y)=g;
+x= g*a;
+y= g*b;
+y-x=g*(b-a);
