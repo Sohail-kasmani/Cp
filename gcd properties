@@ -7,3 +7,19 @@ gcd(x,y)=g;
 x= g*a;
 y= g*b;
 y-x=g*(b-a);
+
+
+
+this can be extended to multiple args as well
+
+
+gcd(a,b,c,d) ---> a<b<c<d
+
+=gcd(a,b,gcd(c,d))
+=gcd(a,b,c,d-c);
+=gcd(a,gcd(b,c),d-c)
+=gcd(a,b,c-b,d-c)
+=gcd(a,b-a,c-b,d-c)
+
+This can be written like this as well gcd(a,b,c,d)=gcd(a,b-a,c-a,d-a) 
+
