@@ -1,0 +1,48 @@
+https://codeforces.com/contest/1734/problem/D 
+
+
+Solution : 
+
+
+int main(){ 
+    FAST                
+    int t;
+    read(t);
+    for(int qqq=1;qqq<=t;qqq++){
+        ll n,k;
+        read(n,k);
+        vll v;
+        vin(v,n);
+        k--;
+        ll i=k-1;
+        ll j=k+1;
+        ll sum1=0;
+        ll sum2=0;
+        ll ans=v[k];
+        while(true){
+            ll flag=1;
+            if(i>=0 && sum1+v[i]+ans>=0){
+                sum1+=v[i];
+                i--;
+                flag=0;
+            }
+            if(j<n && sum2+ans+v[j]>=0){
+                sum2+=v[j];
+                j++;
+                flag=0;
+            }
+            if(flag) break;
+            if(sum1>=0){
+                ans+=sum1;
+                sum1=0;
+            }
+            if(sum2>=0){
+                ans+=sum2;
+                sum2=0;
+            }
+
+        }
+        if(i<0 || j>=n) cout<<"YES"<<endl;
+        else cout<<"NO"<<endl;
+    }
+}
