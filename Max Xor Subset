@@ -1,0 +1,32 @@
+int findMaximumXOR(int arr[], int N) {
+  
+    int index = 0;
+    for (int i = 31; i >= 0; i--) {
+        int maxElement = INT_MIN;
+        int maxIndex = index;
+        for (int j = index; j < N; j++) {
+            if (arr[j] & (1 << i) && arr[j] > maxElement) {
+                maxIndex = j;
+                maxElement = arr[j];
+            }
+        }
+       
+        if (maxElement == INT_MIN) continue;
+        
+        swap(arr[index], arr[maxIndex]);
+        maxIndex = index;
+        
+        for (int j = 0; j < N; j++) {
+            if (arr[j] & (1 << i) && j != maxIndex) {
+                arr[j] = arr[j] ^ maxElement;
+            }
+        }
+        index++;
+    }
+    
+    int ans = 0;
+    for (int i = 0; i < N; i++){
+      ans ^= arr[i];
+    }
+    return ans;
+}
