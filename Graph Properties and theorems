@@ -1,0 +1,2 @@
+1) To find number size of a component of which is part of a bridge in a connected graph just do a dfs and get number of nodes in each subtree then just component1_size=min(sz(node1),sz(node2)) and component2_size=ncomponent1_size
+Ques (https://codeforces.com/problemset/problem/1986/F)
