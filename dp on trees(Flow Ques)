@@ -1,0 +1,23 @@
+https://codeforces.com/problemset/problem/1926/G
+
+sol : 
+ll rec(ll node,ll p,string &s,vll g[],vector<vll> &dp){
+    if(dp[node][p]!=-1) return dp[node][p];
+    ll ans=INT_MAX;
+    if(s[node]!='P'){
+        ll c=(s[node]=='C' && p==0);
+        for(auto &x:g[node]){
+            c+=(s[x]=='P')+rec(x,1,s,g,dp);
+        } 
+        ans=min(ans,c);
+    }
+    if(s[node]!='S'){
+        ll c=(s[node]=='C' && p==1);
+        for(auto &x:g[node]){
+            c+=(s[x]=='S')+rec(x,0,s,g,dp);
+        } 
+        ans=min(ans,c);
+    }
+
+    return dp[node][p]=ans;
+}
