@@ -3,3 +3,6 @@ https://codeforces.com/problemset/problem/2042/C
 solution : https://www.youtube.com/watch?v=Yy_T3dZkhIc
 
 idea behind it everytime you add a partition you add suffix sum to the answer 
+
+
+https://leetcode.com/problems/super-washing-machines/submissions/1887144305/
