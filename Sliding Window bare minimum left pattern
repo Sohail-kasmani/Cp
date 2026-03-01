@@ -1,0 +1,64 @@
+https://leetcode.com/problems/count-subarrays-with-k-distinct-integers/description/
+
+
+
+sol editoroial : 
+class Solution {
+public:
+    long long countSubarrays(vector<int>& nums, int k, int m) {
+        long long res = 0;
+        unordered_map<int, int> freq;
+        int distinctNums = 0, validNums = 0;
+
+        // We have three pointers = right, left, and bare minimum left.
+        // Bare minimum left represents how far left can be such that
+        // subarray of [bml, right] is still valid.
+        for (int r = 0, l = 0, bml = 0; r < nums.size(); r++){
+            freq[nums[r]]++;
+            if (freq[nums[r]] == 1) distinctNums++;
+            if (freq[nums[r]] == m) validNums++;
+
+            while (distinctNums > k){
+                if (l >= bml) {
+                    // why this condition? Well, read the logic with bml first.
+                    // We don't want to reduce the frequency two times so we wait
+                    // until l is caught up with bml.
+                    
+                    freq[nums[l]]--;
+                    if (freq[nums[l]] == 0) distinctNums--;
+                    if (freq[nums[l]] == m - 1) validNums--;
+                }
+                l++;
+                bml = max(bml, l); // bml can never be < l
+            }
+
+            // our sliding window is VALID if and only if...
+            if (distinctNums == k && validNums == k){
+                // If we are here, we know we have at least one valid subarray
+                // that ends in r (the subarray defined as [l, r]). However,
+                // there can be other valid subarrays that end in r such as 
+                // [l+1, r], [l+2, r], etc. To count every one of these,
+                // we just find [bml, r] (the farthest left can go while keeping
+                // the validity). Then the number of valid subarrays that end in r
+                // is bml - l + 1. Why? The set of valid subarrays that end in r look
+                // like this {[l, r], [l+1, r], [l+2, r], ..., [bml, r]}.
+
+                // We know every number here has freq >= m.
+                // We can only push bml if freq[nums[bml]] > m.
+                // Otherwise when we shrink the window, 
+                // freq[nums[bml]] < m and the validity is gone!
+                while (freq[nums[bml]] > m){ 
+                    freq[nums[bml]]--;
+                    // why doesn't changing the global freq map here break stuff? 
+                    // well, this change to the map never changes state since 
+                    // we make sure to never shrink the window to a point where
+                    // validNums changes (and therefore distinctNums doesn't change either).
+                    // In addition, we prevent double shrinking earlier in the code.
+                    bml++;
+                }
+                res += bml - l + 1;
+            }
+        }
+        return res;
+    }
+};
