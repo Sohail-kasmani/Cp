@@ -1,0 +1,79 @@
+class MaxFreqQuery {
+    int n, B, numBlocks;
+    vector<int> a;
+    vector<vector<int>> best;
+    unordered_map<int, vector<int>> pos;
+
+public:
+    MaxFreqQuery(vector<int>& arr) {
+        a = arr;
+        n = a.size();
+        B = sqrt(n) + 1;
+        numBlocks = (n + B - 1) / B;
+
+        best.assign(numBlocks, vector<int>(numBlocks, -1));
+
+        
+        for (int i = 0; i < n; i++) {
+            pos[a[i]].push_back(i);
+        }
+
+        
+        for (int i = 0; i < numBlocks; i++) {
+            unordered_map<int,int> freq;
+            int bestVal = -1, bestFreq = 0;
+
+            for (int j = i; j < numBlocks; j++) {
+                for (int k = j * B; k < min(n, (j + 1) * B); k++) {
+                    int x = a[k];
+                    freq[x]++;
+
+                    if (freq[x] > bestFreq || 
+                       (freq[x] == bestFreq && x < bestVal)) {
+                        bestFreq = freq[x];
+                        bestVal = x;
+                    }
+                }
+                best[i][j] = bestVal;
+            }
+        }
+    }
+
+    
+    int getFreq(int x, int l, int r) {
+        auto &v = pos[x];
+        return upper_bound(v.begin(), v.end(), r) -
+               lower_bound(v.begin(), v.end(), l);
+    }
+
+    int query(int l, int r) {
+        int leftBlock = l / B;
+        int rightBlock = r / B;
+
+        unordered_set<int> candidates;
+
+        for (int i = l; i <= min(r, (leftBlock + 1) * B - 1); i++) {
+            candidates.insert(a[i]);
+        }
+        if (leftBlock != rightBlock) {
+            for (int i = rightBlock * B; i <= r; i++) {
+                candidates.insert(a[i]);
+            }
+        }
+        if (leftBlock + 1 <= rightBlock - 1) {
+            candidates.insert(best[leftBlock + 1][rightBlock - 1]);
+        }
+
+        int bestVal = INT_MAX, bestFreq = 0;
+
+        for (int x : candidates) {
+            int f = getFreq(x, l, r);
+            if (f > bestFreq || (f == bestFreq && x < bestVal)) {
+                bestFreq = f;
+                bestVal = x;
+            }
+        }
+
+        return bestVal;
+    }
+};
