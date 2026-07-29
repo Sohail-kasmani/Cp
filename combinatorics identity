@@ -1,0 +1,16 @@
+ncr = Product of (n-i+1)/i from 1 to r
+
+
+Code : this is capped to k to avoid overflow 
+long long comb(long long n, long long m, long long k) {
+        long long res = 1;
+        m = std::min(m, n - m);
+
+        for (long long i = 1; i <= m; i++) {
+            res = res * (n - i + 1) / i;
+            if (res > k) {
+                return k + 1;
+            }
+        }
+        return res;
+    }
