@@ -1,0 +1,41 @@
+struct Hash {
+    using ll = long long;
+
+    static const ll MOD1 = 1000000007;
+    static const ll MOD2 = 1000000009;
+    static const ll BASE = 911382323;
+
+    vector<ll> h1, h2;
+    vector<ll> p1, p2;
+
+    Hash(const string &s) {
+        int n = s.size();
+
+        h1.resize(n + 1);
+        h2.resize(n + 1);
+        p1.resize(n + 1);
+        p2.resize(n + 1);
+
+        p1[0] = p2[0] = 1;
+
+        for (int i = 0; i < n; i++) {
+            ll x = s[i] - 'a' + 1;
+
+            h1[i + 1] = (h1[i] * BASE + x) % MOD1;
+            h2[i + 1] = (h2[i] * BASE + x) % MOD2;
+
+            p1[i + 1] = p1[i] * BASE % MOD1;
+            p2[i + 1] = p2[i] * BASE % MOD2;
+        }
+    }
+
+
+    pair<ll, ll> get(int l, int r) {
+        int len = r - l + 1;
+
+        ll x1 = (h1[r + 1] - h1[l] * p1[len] % MOD1 + MOD1) % MOD1;
+        ll x2 = (h2[r + 1] - h2[l] * p2[len] % MOD2 + MOD2) % MOD2;
+
+        return {x1, x2};
+    }
+};
